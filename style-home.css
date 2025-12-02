@@ -1,0 +1,477 @@
+/* =========================================
+   MINIMALIST THEME - RED/BLACK/WHITE
+   ========================================= */
+:root {
+    --primary-red: #E60000;
+    --hover-red: #b30000;
+    --pure-black: #000000;
+    --off-black: #111111;
+    --text-gray: #666666;
+    --bg-white: #ffffff;
+    --bg-light: #f8f8f8;
+    --border-color: #e5e5e5;
+    --font-main: 'Poppins', sans-serif;
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Suavidad Premium */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-white);
+    color: var(--off-black);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    /* Texto más nítido */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- HEADER MINIMALISTA --- */
+.main-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    position: fixed;
+    /* Fijo para que acompañe */
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.main-header.scrolled {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo div {
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: var(--primary-red);
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 40px;
+}
+
+.main-nav a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--off-black);
+    position: relative;
+}
+
+/* Efecto hover subrayado rojo elegante */
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-red);
+    transition: var(--transition);
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.header-icon-btn {
+    font-size: 1.1rem;
+    color: var(--pure-black);
+    position: relative;
+}
+
+.header-icon-btn:hover {
+    color: var(--primary-red);
+    transform: translateY(-2px);
+}
+
+.cart-count {
+    background: var(--primary-red);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    padding: 160px 0 100px;
+    /* Más espacio arriba por el header fijo */
+    background: var(--bg-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+}
+
+.hero-text h1 {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    color: var(--pure-black);
+}
+
+.hero-text h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-gray);
+    margin-bottom: 40px;
+    max-width: 450px;
+    line-height: 1.6;
+}
+
+/* Botón Minimalista */
+.btn-main {
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--pure-black);
+    color: white;
+    border-radius: 0;
+    /* Bordes cuadrados para minimalismo, o 4px */
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: var(--primary-red);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.btn-main:hover::before {
+    width: 100%;
+}
+
+.btn-main:hover {
+    border-color: var(--primary-red);
+}
+
+.hero-image {
+    flex: 1.2;
+    height: 600px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Círculo decorativo sutil detrás del trofeo */
+.hero-image::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(230, 0, 0, 0.03) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* --- CATEGORÍAS (BENTO GRID REFINADO) --- */
+.categories-section {
+    padding: 100px 0;
+    background: var(--bg-white);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+    letter-spacing: -1px;
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 350px);
+    gap: 20px;
+}
+
+.bento-card {
+    position: relative;
+    background: var(--bg-light);
+    /* Gris muy suave */
+    border: 1px solid transparent;
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Hover Effect: Borde Rojo sutil y fondo blanco puro */
+.bento-card:hover {
+    background: var(--bg-white);
+    border-color: rgba(230, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    transform: translateY(-5px);
+}
+
+.card-large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.card-medium {
+    grid-column: span 1;
+}
+
+.card-wide {
+    grid-column: span 2;
+}
+
+.card-content {
+    padding: 30px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--pure-black);
+    line-height: 1.2;
+}
+
+.btn-arrow {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-red);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: var(--transition);
+}
+
+.bento-card:hover .btn-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Imágenes dentro de las tarjetas */
+.image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.image-wrapper img {
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+    transition: var(--transition);
+    filter: grayscale(100%);
+    /* Minimalismo: B&N por defecto */
+}
+
+/* Hover: Color y Efecto */
+.bento-card:hover img.base-img {
+    filter: grayscale(0%);
+    /* Recupera color */
+    transform: scale(1.05);
+}
+
+/* Opcional: Si quieres holograma, manténlo sutil */
+.holo-img {
+    display: none;
+}
+
+/* En diseño minimalista, a veces menos es más. Desactiva si prefieres limpieza */
+
+/* --- ANIMACIONES DE ENTRADA (SCROLL) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- TRANSICIÓN DE PÁGINA (ZOOM) --- */
+.bento-card.card-exit-active {
+    z-index: 9999;
+    border: none;
+}
+
+.bento-card.card-exit-active .card-content {
+    opacity: 0;
+}
+
+.bento-card.card-exit-active .image-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    z-index: 10000;
+    animation: zoomOutWhite 0.6s forwards cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.bento-card.card-exit-active img {
+    filter: grayscale(0%);
+    animation: scaleUp 0.6s forwards;
+}
+
+@keyframes zoomOutWhite {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    100% {
+        transform: scale(3);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .hero-text h1 {
+        font-size: 3.5rem;
+    }
+
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .card-large {
+        grid-column: span 2;
+        height: 400px;
+    }
+
+    .card-medium,
+    .card-wide {
+        grid-column: span 1;
+        height: 300px;
+    }
+
+    .card-wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .header-actions,
+    .main-nav {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-image {
+        height: 400px;
+        width: 100%;
+    }
+
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-large,
+    .card-medium,
+    .card-wide {
+        grid-column: span 1;
+    }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Bolsa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GRUPO <span>PREMIA</span></a>
+            <div class="header-actions">
+                <a href="perfil.html" class="header-icon-btn"><i class="far fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <h1>Resumen de Compra</h1>
+        <div id="fullCartItems" style="margin-top:30px;"></div>
+        <div style="text-align:right; margin-top:30px; border-top:1px solid #eee; padding-top:20px;">
+            <h2 style="margin-bottom:20px;">Total: <span id="grandTotal" class="text-red">Q0.00</span></h2>
+            <button onclick="goToCheckout()" class="btn-primary" style="width:auto;">CONTINUAR COMPRA</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { getCart, saveCart, getCurrentUser, updateCartCount } from './utils.js';
+        updateCartCount();
+        const container = document.getElementById('fullCartItems');
+        let cart = getCart();
+
+        function render() {
+            container.innerHTML = '';
+            let total = 0;
+            if (cart.length === 0) { container.innerHTML = '<p>Bolsa vacía.</p>'; return; }
+            cart.forEach((item, index) => {
+                total += item.price;
+                const row = document.createElement('div');
+                row.style.cssText = "display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #f5f5f5; padding:15px 0;";
+                row.innerHTML = `
+                    <div style="display:flex; gap:15px; align-items:center;">
+                        <img src="${item.image}" style="width:60px; height:60px; object-fit:contain;">
+                        <div><h4 style="margin:0;">${item.name}</h4><p style="font-size:0.8rem; margin:0;">${item.color}</p></div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:20px;">
+                        <strong>Q${item.price.toFixed(2)}</strong>
+                        <button onclick="window.removeItem(${index})" style="border:none; background:none; color:#ccc; cursor:pointer;">×</button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+            document.getElementById('grandTotal').innerText = `Q${total.toFixed(2)}`;
+        }
+        window.removeItem = function (index) { cart.splice(index, 1); saveCart(cart); render(); };
+        window.goToCheckout = function () {
+            if (cart.length === 0) return alert("Bolsa vacía");
+            if (getCurrentUser()) { window.location.href = 'checkout.html'; }
+            else {
+                if (confirm("¿Iniciar sesión?\n\n[ACEPTAR] Sí\n[CANCELAR] No, como invitado")) {
+                    localStorage.setItem('returnUrl', 'checkout.html'); window.location.href = 'login.html';
+                } else { window.location.href = 'checkout.html'; }
+            }
+        };
+        render();
+    </script>
+</body>
+
+</html>

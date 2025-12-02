@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GRUPO <span>PREMIA</span></a>
+            <div class="header-actions"><button onclick="logout()"
+                    style="border:none; background:none; cursor:pointer;">Salir</button></div>
+        </div>
+    </header>
+    <div class="page-container">
+        <div style="margin-bottom:40px;">
+            <h1 id="userName">Usuario</h1>
+            <p id="userEmail">email@ejemplo.com</p>
+        </div>
+        <h3>Historial de Pedidos</h3>
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Orden</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="ordersBody"></tbody>
+        </table>
+    </div>
+    <script type="module">
+        import { getOrders, logoutUser, getCurrentUser } from './utils.js';
+        const user = getCurrentUser(); if (!user) window.location.href = 'login.html';
+        document.getElementById('userName').innerText = user.name; document.getElementById('userEmail').innerText = user.email;
+        window.logout = logoutUser;
+        const tbody = document.getElementById('ordersBody');
+        const orders = getOrders().reverse();
+        if (orders.length === 0) tbody.innerHTML = '<tr><td colspan="4">Sin pedidos.</td></tr>';
+        else orders.forEach(o => tbody.innerHTML += `<tr><td>#${o.id}</td><td>${o.date}</td><td>Q${o.total.toFixed(2)}</td><td><span class="status-badge">${o.status}</span></td></tr>`);
+    </script>
+</body>
+
+</html>

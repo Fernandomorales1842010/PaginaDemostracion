@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalizador | Grupo Premia</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GRUPO <span>PREMIA</span></a>
+            <div class="header-actions">
+                <a href="perfil.html" class="header-icon-btn"><i class="far fa-user"></i></a>
+                <button class="header-icon-btn" onclick="toggleCart(true)">
+                    <i class="fas fa-shopping-bag"></i> <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <div class="preview-area">
+            <model-viewer id="trophyViewer" src="" alt="Trofeo Personalizable" auto-rotate camera-controls
+                shadow-intensity="1" camera-orbit="45deg 55deg 2.5m">
+            </model-viewer>
+
+            <div id="resultPlate" class="floating-plate">
+                <p id="resLine1"
+                    style="font-family:'Playfair Display'; font-weight:900; font-size:1.4rem; margin-bottom:5px;">
+                    CAMPEÓN</p>
+                <p id="resLine2" style="font-family:'Poppins'; font-size:0.9rem; color:#444;">Tu Nombre</p>
+            </div>
+        </div>
+
+        <div class="controls-area">
+            <div style="margin-bottom: 20px;">
+                <span class="tag-new-card" id="tagNew" style="display:none;">NUEVO</span>
+                <h1 id="productTitle">Cargando...</h1>
+                <div class="card-price">Q0.00</div>
+            </div>
+
+            <p class="desc">Personaliza este trofeo exclusivo con tus colores y grabado especial.</p>
+
+            <div style="margin-bottom: 30px;">
+                <span class="color-label">ACABADO: <span id="colorName"
+                        style="font-weight:400; color:#666;">Seleccionar</span></span>
+                <div class="color-options"></div>
+            </div>
+
+            <div style="background: var(--bg-light); padding: 20px; border-radius: 12px; margin-bottom: 30px;">
+                <h3 style="font-size: 1rem; margin-bottom: 15px;">Personalización (Gratis)</h3>
+
+                <div class="input-wrapper">
+                    <div class="input-label">
+                        <span>Línea 1 (Título)</span>
+                        <span id="charCount1" class="char-counter">0/20</span>
+                    </div>
+                    <input type="text" id="inputLine1" class="form-control" placeholder="Ej: MVP 2025" maxlength="20"
+                        oninput="syncText()">
+                </div>
+
+                <div class="input-wrapper">
+                    <div class="input-label">
+                        <span>Línea 2 (Nombre)</span>
+                        <span id="charCount2" class="char-counter">0/25</span>
+                    </div>
+                    <input type="text" id="inputLine2" class="form-control" placeholder="Ej: Juan Pérez" maxlength="25"
+                        oninput="syncText()">
+                </div>
+
+                <div class="input-label">Tipografía</div>
+                <div style="display:flex; gap:10px;">
+                    <button onclick="setFont('classic')" class="form-control font-btn active"
+                        style="cursor:pointer; font-family:'Playfair Display'; border:1px solid #ccc;">Clásica</button>
+                    <button onclick="setFont('modern')" class="form-control font-btn"
+                        style="cursor:pointer; font-family:'Poppins'; border:1px solid transparent;">Moderna</button>
+                    <button onclick="setFont('script')" class="form-control font-btn"
+                        style="cursor:pointer; font-family:'Dancing Script'; border:1px solid transparent;">Script</button>
+                </div>
+            </div>
+
+            <button class="btn-black" onclick="addToCart()">AÑADIR A LA BOLSA</button>
+        </div>
+    </div>
+
+    <div id="cartSidebar" class="cart-sidebar">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+            <h2>Tu Bolsa</h2>
+            <button onclick="toggleCart(false)" style="border:none; background:none; font-size:1.5rem;">&times;</button>
+        </div>
+        <div id="cartItems" style="flex:1; overflow-y:auto;"></div>
+        <div style="border-top:1px solid #eee; padding-top:20px;">
+            <div
+                style="display:flex; justify-content:space-between; font-weight:700; font-size:1.2rem; margin-bottom:20px;">
+                <span>Total</span> <span id="cartTotal">Q0.00</span>
+            </div>
+            <button class="btn-black" onclick="window.location.href='carrito.html'">PAGAR AHORA</button>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

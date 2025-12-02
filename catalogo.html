@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo | Grupo Premia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GRUPO <span>PREMIA</span></a>
+            <div class="header-actions">
+                <a href="perfil.html" class="header-icon-btn"><i class="far fa-user"></i></a>
+                <a href="carrito.html" class="header-icon-btn"><i class="fas fa-shopping-bag"></i><span
+                        class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="catalog-header">
+        <h1>Colección 2025</h1>
+        <p>Trofeos de precisión diseñados para la excelencia.</p>
+    </div>
+
+    <div id="catalogGrid" class="catalog-grid"></div>
+
+    <script type="module">
+        import { products } from './data.js';
+        import { updateCartCount } from './utils.js';
+        updateCartCount();
+        const grid = document.getElementById('catalogGrid');
+        products.forEach(product => {
+            const card = document.createElement('a');
+            card.href = `product.html?id=${product.id}`; card.className = 'product-card';
+            card.innerHTML = `
+                <div class="card-image-container">
+                    ${product.isNew ? '<span class="tag-new-card">NEW</span>' : ''}
+                    <img src="${product.image}" alt="${product.name}" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">${product.name}</h3>
+                    <div class="card-price">Q${product.price.toFixed(2)}</div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+
+</html>
